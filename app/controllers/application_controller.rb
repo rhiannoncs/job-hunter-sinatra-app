@@ -6,4 +6,8 @@ class ApplicationController < Sinatra::Base
   set :session_secret, "adamantium"
   set :views, Proc.new { File.join(root, "../views/") }
 
+  get '/' do
+  	erb :index
+  end
+
  end
