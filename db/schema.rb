@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 8) do
+ActiveRecord::Schema.define(version: 10) do
 
   create_table "actions", force: :cascade do |t|
     t.string "action_type"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "title"
     t.integer "company_id"
     t.integer "user_id"
+    t.string "linkedin"
   end
 
   create_table "postings", force: :cascade do |t|
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "remote_availability"
     t.integer "company_id"
     t.integer "user_id"
+    t.string "job_title"
   end
 
   create_table "skillpostings", force: :cascade do |t|

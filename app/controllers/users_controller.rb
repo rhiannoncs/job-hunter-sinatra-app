@@ -19,9 +19,12 @@ class UsersController < ApplicationController
 	get '/users/:id' do
 		@user = User.find_by(:id => params[:id])
 		if @user == current_user
-			#@recent_actions = Action.find
-			#@recent_postings = Posting.all.select {|posting| posting.user_id == @user.id}
-			#@recent_companies = Company.all.select {|company| company.user_id == @user.id}
+			actions = Action.all.select {|action| action.user == @user}
+			@recent_actions = actions.last(5)
+			postings = Posting.all.select {|posting| posting.user == @user}
+			@recent_postings = postings.last(5)
+			companies = Company.all.select {|company| company.user == @user}
+			@recent_companies = companies.last(5)
 			erb :'/users/dashboard'
 		else
 			redirect to "/login"

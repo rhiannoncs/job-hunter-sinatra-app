@@ -1,0 +1,25 @@
+<h1><%= @company.name %></h1>
+<h2><%= @company.location %></h2>
+<br>
+<a href="<%= @company.website %>"><%= @company.website %></a>
+<h3>Contacts</h3>
+<% @contacts.each do |contact| %>
+<h4><%= contact.name %></h4>
+<h5><%= contact.title %></h5>
+<p><%= contact.email %></p>
+<p><%= contact.phone %></p>
+<p><%= contact.linkedin %></p>
+<% end %>
+<br>
+<a href="/contacts/new">Create a Company Contact</a>
+<h3>Postings</h3>
+<% @postings.each do |posting| %>
+<h4><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h4>
+<% end %>
+<br>
+<a href="/postings/new">Create a Posting for this Company</a>
+<h3>Skills This Company Looks For</h3>
+<br>
+<a href="/companies/<%= @company.id %>/edit">Edit this Listing (if you are the creator)</a>
+<br>
+<a href="/companies/<%= @company.id %>/delete">Delete this Listing (if you are the creator)</a>

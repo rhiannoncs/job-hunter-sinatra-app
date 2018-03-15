@@ -17,4 +17,7 @@
 <h2>Recently Created Postings</h2>
 <a href="/postings">See all postings</a>
 <h2>Recently Created Companies</h2>
+<% @recent_companies.each do |company| %>
+<h3><a href="/companies/<%= company.id %>"><%= company.name %></a></h3>
+<% end %>
 <a href="/companies">See all companies</a>
