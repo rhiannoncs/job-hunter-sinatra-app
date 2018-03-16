@@ -3,8 +3,10 @@
 <h4><%= @contact.title %></h4>
 <h4><%= @contact.phone %></h4>
 <h4><%= @contact.email %></h4>
-<h4><a href="<%= @contact.linkedin %>">LinkedIn</a></h4>
-<a href="/contact/<%= @contact.id %>/edit">Edit this Contact (if you are the creator)</a>
+<% if @contact.linkedin.length > 1 %>
+	<h4><a href="<%= @contact.linkedin %>">LinkedIn</a></h4>
+<% end %>
+<a href="/contacts/<%= @contact.id %>/edit">Edit this Contact (if you are the creator)</a>
 <br>
 <form method="post" action="/contacts/<%= @contact.id %>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

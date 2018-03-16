@@ -16,7 +16,7 @@ class ContactsController < ApplicationController
 			contact.update(user_id: current_user.id)
 			redirect to "/contacts/#{contact.id}"
 		else
-			flash[:message] = "Name and company are required fields."
+			flash[:message] = "Name is a required field."
 			redirect to "/contacts/new"
 		end
 	end
@@ -29,6 +29,29 @@ class ContactsController < ApplicationController
 			redirect to "/users/#{current_user.id}"
 		else
 			erb :"/contacts/show"
+		end
+	end
+
+	get '/contacts/:id/edit' do
+		@contact = Contact.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @contact && @contact.user == current_user
+			erb :"/contacts/edit"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
+	patch '/contacts/:id' do
+		contact = Contact.find_by(:id => params[:id])
+		params.delete(:captures) if params.key?(:captures) && params[:captures].empty?
+		if contact.update(:name => params[:name], :title => params[:title], :phone => params[:phone], 
+			:email => params[:email], :linkedin => params[:linkedin], :company_id => params[:company_id])
+			redirect to "/contacts/#{contact.id}"
+		else
+			flash[:message] = "Name is a required field."
+			redirect to "/contacts/#{contact.id}/edit"
 		end
 	end
 
