@@ -56,4 +56,17 @@ class CompaniesController < ApplicationController
 			redirect to "/companies/#{company.id}/edit"
 		end
 	end
+
+	delete '/companies/:id/delete' do
+		@company = Company.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @company.user == current_user
+			@company.delete
+			flash[:message] = "Company has been deleted."
+			redirect to "/users/#{current_user.id}"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
 end

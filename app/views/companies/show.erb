@@ -22,4 +22,7 @@
 <br>
 <a href="/companies/<%= @company.id %>/edit">Edit this Listing (if you are the creator)</a>
 <br>
-<a href="/companies/<%= @company.id %>/delete">Delete this Listing (if you are the creator)</a>
+<form method="post" action="/companies/<%= @company.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Listing (if you are the creator)">
+</form>
