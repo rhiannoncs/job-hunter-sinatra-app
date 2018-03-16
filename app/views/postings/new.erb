@@ -1,0 +1,43 @@
+<h1>Create a Job Posting</h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form method="POST" action="/postings/new">
+	<h3><label for="job_title">Job Title:</label></h3>
+	<input type="text" name="posting[job_title]">
+	<h3><label for="company_id">Company:</label></h3>
+	<br>
+	<select name="posting[company_id]">
+		<% Company.all.each do |company| %>
+			<option value="<%= company.id %>"><%= company.name %></option>
+		<% end %>
+	</select>
+	<h3><label for="content">Posting Content:</label></h3>
+	<input type="text" name="posting[content]">
+	<h3><label for="url">Url:</label></h3>
+	<input type="text" name="posting[url]">
+	<h3><label for="location">Location:</label></h3>
+	<input type="text" name="posting[location]">
+	<h3><label for="status">Status:</label></h3>
+	<br>
+	<select name="posting[status]">
+		<option value="open">Open</option>
+		<option value="closed">Closed</option>
+	</select>
+	<h3><label for="remote_availability">Remote Work Availability:</label></h3>
+	<br>
+	<select name="posting[remote_availability]">
+		<option value="onsite">Onsite Required</option>
+		<option value="remote">Remote Available</option>
+	</select>
+	<br>
+	<% Skill.all.each do |skill| %>
+		<input type="checkbox" name="posting[skill_ids][]" value="<% skill.id %>"><%= skill.name %></input>
+	<% end %>
+	<br>
+	<label>and/or, create a new skill:</label>
+  	<input  type="text" name="skill[name]"></input>
+	<br>
+	<input type="submit" value="Submit">
+</form>

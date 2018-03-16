@@ -1,0 +1,19 @@
+<h1><%= @posting.job_title %></h1>
+<h2><a href="/companies/<%= @posting.company.id %>"><%= @posting.company.name %></a></h2>
+<h4><%= @posting.content %></h4>
+<h4><%= @posting.location %></h4>
+<h4><%= @posting.remote_availability %></h4>
+<h4><%= @posting.status %></h4>
+<% if @posting.url.length > 0 %>
+	<h4><a href="<%= @posting.url %>">Posting Source</a></h4>
+<% end %>
+<% @posting.skills.each do |skill| %>
+	<%= skill.name %>
+	<br>
+<% end %>
+<a href="/postings/<%= @posting.id %>/edit">Edit this Posting (if you are the creator)</a>
+<br>
+<form method="post" action="/postings/<%= @posting.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Contact (if you are the creator)">
+</form>
