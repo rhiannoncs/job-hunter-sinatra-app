@@ -55,4 +55,17 @@ class ContactsController < ApplicationController
 		end
 	end
 
+	delete '/contacts/:id/delete' do
+		@contact = Contact.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @contact.user == current_user
+			@contact.delete
+			flash[:message] = "Contact has been deleted."
+			redirect to "/users/#{current_user.id}"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
 end
