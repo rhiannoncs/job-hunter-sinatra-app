@@ -1,0 +1,44 @@
+<h1>Edit Job Posting</h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form method="POST" action="/postings/<%= @posting.id %>">
+	<input id="hidden" type="hidden" name="_method" value="patch">
+	<h3><label for="job_title">Job Title:</label></h3>
+	<input type="text" name="posting[job_title]" value="<%= @posting.job_title%>">
+	<h3><label for="company_id">Company:</label></h3>
+	<br>
+	<select name="posting[company_id]" value="<%= @posting.company_id %>">
+		<% Company.all.each do |company| %>
+			<option value="<%= company.id %>"><%= company.name %></option>
+		<% end %>
+	</select>
+	<h3><label for="content">Posting Content:</label></h3>
+	<input type="text" name="posting[content]" value="<%= @posting.content %>">
+	<h3><label for="url">Url:</label></h3>
+	<input type="text" name="posting[url]" value="<%= @posting.url %>">
+	<h3><label for="location">Location:</label></h3>
+	<input type="text" name="posting[location]" value="<%= @posting.location %>">
+	<h3><label for="status">Status:</label></h3>
+	<br>
+	<select name="posting[status]" value="<%= @posting.status %>">
+		<option value="open">Open</option>
+		<option value="closed">Closed</option>
+	</select>
+	<h3><label for="remote_availability">Remote Work Availability:</label></h3>
+	<br>
+	<select name="posting[remote_availability]" value="<%= @posting.remote_availability %>">
+		<option value="onsite">Onsite Required</option>
+		<option value="remote">Remote Available</option>
+	</select>
+	<br>
+	<% Skill.all.each do |skill| %>
+		<input type="checkbox" name="posting[skill_ids]" value="<%= skill.id %>" <%= 'checked' if @posting.skills.include?(skill) %>><%= skill.name %></input>
+	<% end %>
+	<br>
+	<label>and/or, create a new skill:</label>
+  	<input  type="text" name="skill[name]"></input>
+	<br>
+	<input type="submit" value="Edit">
+</form>
