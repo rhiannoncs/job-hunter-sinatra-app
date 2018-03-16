@@ -1,0 +1,25 @@
+<h1>Create a Contact Listing</h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form method="POST" action="/contacts/new">
+	<h3><label for="name">Name:</label></h3>
+	<input type="text" name="name">
+	<h3><label for="title">Title:</label></h3>
+	<input type="text" name="title">
+	<h3><label for="phone">Phone:</label></h3>
+	<input type="text" name="phone">
+	<h3><label for="email">Email:</label></h3>
+	<input type="text" name="email">
+	<h3><label for="linkedin">LinkedIn:</label></h3>
+	<input type="text" name="linkedin">
+	<h3><label for="company_id">Company:</label></h3>
+	<br>
+	<select name="company_id">
+		<% Company.all.each do |company| %>
+			<option value="<%= company.id %>"><%= company.name %></option>
+		<% end %>
+	</select>
+	<input type="submit" value="Submit">
+</form>
