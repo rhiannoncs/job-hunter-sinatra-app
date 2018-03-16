@@ -33,7 +33,6 @@ class PostingsController < ApplicationController
 		elsif !@posting
 			redirect to "/users/#{current_user.id}"
 		else
-			binding.pry
 			erb :"/postings/show"
 		end
 	end
