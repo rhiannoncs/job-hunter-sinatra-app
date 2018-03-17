@@ -1,1 +1,4 @@
-<h1><%= @action.type %></h1>
+<h1><%= @action.action_type %></h1>
+<h2><a href="/companies/<%= @action.company.id %>"><%= @action.company.name %></a></h2>
+<h4><%= @action.date %></h4>
+<p><%= @action.note %></p>
