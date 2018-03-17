@@ -67,5 +67,18 @@ class PostingsController < ApplicationController
 		end
 	end
 
+	delete '/postings/:id/delete' do
+		@posting = Posting.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @posting.user == current_user
+			@posting.delete
+			flash[:message] = "Posting has been deleted."
+			redirect to "/users/#{current_user.id}"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
 
 end
