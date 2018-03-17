@@ -2,3 +2,9 @@
 <h2><a href="/companies/<%= @action.company.id %>"><%= @action.company.name %></a></h2>
 <h4><%= @action.date %></h4>
 <p><%= @action.note %></p>
+<a href="/actions/<%= @action.id %>/edit">Edit this Action</a>
+<br>
+<form method="post" action="/actions/<%= @action.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Action">
+</form>

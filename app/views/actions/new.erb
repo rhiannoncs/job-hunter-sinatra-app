@@ -7,9 +7,9 @@
 	<h3><label for="action_type">Action Type</label></h3>
 	<br>
 	<select name="action_type">
-		<option value="application">Application</option>
-		<option value="contact">Contact</option>
-		<option value="other">Other</option>
+		<% @action_types.each do |action_type| %>
+			<option value="<%= action_type %>"><%= action_type %></option>
+		<% end %>
 	</select>
 	<h3><label for="date">Date</label></h3>
 	<br>

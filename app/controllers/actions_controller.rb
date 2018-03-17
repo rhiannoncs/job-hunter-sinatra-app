@@ -2,6 +2,7 @@ class ActionsController < ApplicationController
 
 	get '/actions/new' do
 		if logged_in?
+			@action_types = ["Application", "Contact", "Other"]
 			erb :"/actions/new"
 		else
 			redirect to "/login"
@@ -25,10 +26,22 @@ class ActionsController < ApplicationController
 		@action = Action.find_by(:id => params[:id])
 		if !logged_in?
 			redirect to "/login"
-		elsif !@action
-			redirect to "/users/#{current_user.id}"
-		else
+		elsif @action && @action.user == current_user
 			erb :"/actions/show"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
+	get '/actions/:id/edit' do
+		@action = Action.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @action && @action.user == current_user
+			@action_types = ["Application", "Contact", "Other"]
+			erb :"/actions/edit"
+		else
+			redirect to "/users/#{current_user.id}"
 		end
 	end
 
