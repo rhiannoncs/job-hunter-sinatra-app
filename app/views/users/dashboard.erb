@@ -17,11 +17,14 @@
 <br>
 <h2>Recent Actions</h2>
 <br>
+<% @recent_actions.each do |action| %>
+	<h3><a href="/actions/<%= action.id %>"><%= action.action_type %>, <%= action.company.name %></a></h3>
+<% end %>
 <a href="/actions">See all actions</a>
 <h2>Recently Created Postings</h2>
 <% @recent_postings.each do |posting| %>
 	<h3><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h3>
-	<% end %>
+<% end %>
 <a href="/postings">See all postings</a>
 <h2>Recently Created Companies</h2>
 <% @recent_companies.each do |company| %>

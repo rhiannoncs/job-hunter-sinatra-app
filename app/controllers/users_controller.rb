@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 		@user = User.find_by(:id => params[:id])
 		if @user == current_user
 			actions = Action.all.select {|action| action.user == @user}
-			@recent_actions = actions.last(5)
+			@recent_actions = actions.last(10)
 			postings = Posting.all.select {|posting| posting.user == @user}
 			@recent_postings = postings.last(5)
 			companies = Company.all.select {|company| company.user == @user}
