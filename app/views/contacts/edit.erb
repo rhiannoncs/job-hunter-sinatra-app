@@ -17,9 +17,13 @@
 	<input type="text" name="linkedin" value="<%= @contact.linkedin %>">
 	<h3><label for="company_id">Company:</label></h3>
 	<br>
-	<select name="company_id" value="<%= @contact.company_id %>">
+	<select name="company_id">
 		<% Company.all.each do |company| %>
-			<option value="<%= company.id %>"><%= company.name %></option>
+			<% if company == @contact.company %>
+				<option value="<%= company.id %>" selected><%= company.name %></option>
+			<% else %>
+				<option value="<%= company.id %>"><%= company.name %></option>
+			<% end %>
 		<% end %>
 	</select>
 	<input type="submit" value="Submit">

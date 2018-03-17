@@ -34,7 +34,7 @@
 	</select>
 	<br>
 	<% Skill.all.each do |skill| %>
-		<input type="checkbox" name="posting[skill_ids]" value="<%= skill.id %>" <%= 'checked' if @posting.skills.include?(skill) %>><%= skill.name %></input>
+		<input type="checkbox" name="posting[skill_ids][]" value="<%= skill.id %>" <%= 'checked' if @posting.skills.include?(skill) %>><%= skill.name %></input>
 	<% end %>
 	<br>
 	<label>and/or, create a new skill:</label>

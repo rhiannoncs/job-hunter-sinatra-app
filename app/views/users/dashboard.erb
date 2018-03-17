@@ -19,9 +19,12 @@
 <br>
 <a href="/actions">See all actions</a>
 <h2>Recently Created Postings</h2>
+<% @recent_postings.each do |posting| %>
+	<h3><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h3>
+	<% end %>
 <a href="/postings">See all postings</a>
 <h2>Recently Created Companies</h2>
 <% @recent_companies.each do |company| %>
-<h3><a href="/companies/<%= company.id %>"><%= company.name %></a></h3>
+	<h3><a href="/companies/<%= company.id %>"><%= company.name %></a></h3>
 <% end %>
 <a href="/companies">See all companies</a>
