@@ -3,7 +3,8 @@
   <%= flash[:message] %>
 <% end %>
 
-<form method="POST" action="/actions/new">
+<form method="POST" action="/actions/<%= @action.id %>">
+	<input id="hidden" type="hidden" name="_method" value="patch">
 	<h3><label for="action_type">Action Type</label></h3>
 	<br>
 	<select name="action_type">

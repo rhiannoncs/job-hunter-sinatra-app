@@ -45,4 +45,16 @@ class ActionsController < ApplicationController
 		end
 	end
 
+	patch '/actions/:id' do
+		action = Action.find_by(:id => params[:id])
+		params.delete(:captures) if params.key?(:captures) && params[:captures].empty?
+		if action.update(:action_type => params[:action_type], :date => params[:date], :note => params[:note], 
+			:company_id => params[:company_id])
+			redirect to "/actions/#{action.id}"
+		else
+			flash[:message] = "Action could not be saved."
+			redirect to "/actions/#{action.id}/edit"
+		end
+	end
+
 end
