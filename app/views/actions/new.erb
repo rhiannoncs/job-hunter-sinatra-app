@@ -1,0 +1,29 @@
+<h1>New Job Hunt Action</h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form method="POST" action="/actions/new">
+	<h3><label for="action_type">Action Type</label></h3>
+	<br>
+	<select name="action_type">
+		<option value="application">Application</option>
+		<option value="contact">Contact</option>
+		<option value="other">Other</option>
+	</select>
+	<h3><label for="date">Date</label></h3>
+	<br>
+	<input type="date" value="date">
+	<h3><label for="note">Note</label></h3>
+	<br>
+	<input type="text" value="note">
+	<h3><label for="company_id">Company</label></h3>
+	<br>
+	<select name="company_id">
+		<% Company.all.each do |company| %>
+			<option value="<%= company.id %>"><%= company.name %></option>
+		<% end %>
+	</select>
+	<br>
+	<input type="submit" value="Submit">
+</form>

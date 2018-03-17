@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 11) do
+ActiveRecord::Schema.define(version: 12) do
 
   create_table "actions", force: :cascade do |t|
     t.string "action_type"
     t.string "note"
     t.integer "user_id"
     t.integer "company_id"
+    t.date "date"
   end
 
   create_table "companies", force: :cascade do |t|
