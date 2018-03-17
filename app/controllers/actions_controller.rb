@@ -57,4 +57,17 @@ class ActionsController < ApplicationController
 		end
 	end
 
+	delete '/actions/:id/delete' do
+		@action = Action.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @action.user == current_user
+			@action.delete
+			flash[:message] = "Action has been deleted."
+			redirect to "/users/#{current_user.id}"
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
 end
