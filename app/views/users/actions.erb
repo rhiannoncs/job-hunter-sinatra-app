@@ -1,0 +1,6 @@
+<h1>Your Actions</h1>
+<% @actions.each do |action| %>
+	<h2><a href="/actions/<%= action.id %>"><%= action.action_type %></h2>
+	<h3><a href="/companies/<%= action.company.id %>"><%= action.company.name %></a></h3>
+	<h4><%= action.date %></h4>
+<% end %>

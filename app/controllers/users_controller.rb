@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 			@postings = all_postings.reverse
 			erb :'/users/postings'
 		else
-			redirect to "/users/#{current_user.id}"
+			redirect to "/users/#{current_user.id}/postings"
 		end
 	end
 
@@ -53,7 +53,20 @@ class UsersController < ApplicationController
 			@companies = all_companies.reverse
 			erb :'/users/companies'
 		else
-			redirect to "/users/#{current_user.id}"
+			redirect to "/users/#{current_user.id}/companies"
+		end
+	end
+
+	get '/users/:id/actions' do
+		@user = User.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @user == current_user
+			all_actions = Action.all.select {|action| action.user == @user}
+			@actions = all_actions.reverse
+			erb :'/users/actions'
+		else
+			redirect to "/users/#{current_user.id}/actions"
 		end
 	end
 
