@@ -1,0 +1,4 @@
+<h1>Your Companies</h1>
+<% @companies.each do |company| %>
+	<h2><a href="/companies/<%= company.id %>"><%= company.name %></a></h2>
+<% end %>
