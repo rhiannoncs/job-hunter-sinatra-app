@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 			actions = Action.all.select {|action| action.user == @user}
 			@recent_actions = actions.last(10)
 			postings = Posting.all.select {|posting| posting.user == @user}
-			@recent_postings = postings.last(5)
+			@recent_postings = postings.last(5).reverse
 			companies = Company.all.select {|company| company.user == @user}
 			@recent_companies = companies.last(5)
 			erb :'/users/dashboard'
@@ -30,6 +30,20 @@ class UsersController < ApplicationController
 			redirect to "/login"
 		end
 	end
+
+	get '/users/:id/postings' do
+		@user = User.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif @user == current_user
+			all_postings = Posting.all.select {|posting| posting.user == @user}
+			@postings = all_postings.reverse
+			erb :'/users/postings'
+		else
+			redirect to "/users/#{current_user.id}"
+		end
+	end
+
 
 	get '/login' do
 		if !logged_in?
@@ -59,4 +73,6 @@ class UsersController < ApplicationController
 			redirect to "/login"
 		end
 	end
+
+
 end
