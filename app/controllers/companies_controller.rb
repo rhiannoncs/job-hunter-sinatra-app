@@ -1,5 +1,14 @@
 class CompaniesController < ApplicationController
 
+	get '/companies' do
+		if logged_in?
+			@companies = Company.order(:name)
+			erb :"/companies/show_all"
+		else
+			redirect to "/login"
+		end
+	end
+
 	get '/companies/new' do
 		if logged_in?
 			erb :"/companies/new"
