@@ -1,5 +1,14 @@
 class PostingsController < ApplicationController
 
+	get '/postings' do
+		if logged_in?
+			@postings = Posting.all.reverse
+			erb :"/postings/show_all"
+		else
+			redirect to "/login"
+		end
+	end
+
 	get '/postings/new' do
 		if logged_in?
 			erb :"/postings/new"

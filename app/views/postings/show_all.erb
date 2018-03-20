@@ -1,0 +1,5 @@
+<h1>Postings</h1>
+<% @postings.each do |posting| %>
+	<h2><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h2>
+	<h3><a href="/companies/<%= posting.company.id %>"><%= posting.company.name %></a></h2>
+<% end %>
