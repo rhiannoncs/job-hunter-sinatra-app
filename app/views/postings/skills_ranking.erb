@@ -1,0 +1,4 @@
+<h1>Skills</h1>
+<% @skills_count.reverse.each do |skill_count| %>
+	<h2><%= skill_count[0].name %>: <a href="/skills/<%= skill_count[0].id %>"><%= skill_count[1] %> postings</a></h2>
+<% end %>

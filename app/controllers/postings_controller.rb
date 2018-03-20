@@ -89,5 +89,18 @@ class PostingsController < ApplicationController
 		end
 	end
 
+	get '/skills/rankings' do
+		if !logged_in?
+			redirect to "/login"
+		else
+			skill_hash = Hash.new
+			Skill.all.each do |skill|
+				skill_hash[skill] = SkillPosting.all.count {|record| record.skill_id == skill.id}
+			end
+			@skills_count = skill_hash.sort_by {|skill, count| count}
+			erb :"/postings/skills_ranking"
+		end
+	end
+
 
 end
