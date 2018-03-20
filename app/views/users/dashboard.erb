@@ -26,8 +26,12 @@
 	<h3><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h3>
 <% end %>
 <a href="/users/<%= @user.id %>/postings">See all of your postings</a>
+<br>
+<a href="/postings">See all postings</a>
 <h2>Recently Created Companies</h2>
 <% @recent_companies.each do |company| %>
 	<h3><a href="/companies/<%= company.id %>"><%= company.name %></a></h3>
 <% end %>
 <a href="/users/<%= @user.id %>/companies">See all of your companies</a>
+<br>
+<a href="/companies">See all companies</a>
