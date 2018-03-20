@@ -37,9 +37,6 @@ class CompaniesController < ApplicationController
 		elsif !@company
 			redirect to "/users/#{current_user.id}"
 		else
-			@contacts = Contact.all.select {|contact| contact.company == @company}
-			@postings = Posting.all.select {|posting| posting.company == @company}
-			@skills = Skill.all.select {|skill| skill.companies.include?(@company)}
 			erb :"/companies/show"
 		end
 	end

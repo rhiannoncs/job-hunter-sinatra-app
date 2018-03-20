@@ -3,7 +3,7 @@
 <br>
 <a href="<%= @company.website %>"><%= @company.website %></a>
 <h3>Contacts</h3>
-<% @contacts.each do |contact| %>
+<% @company.contacts.each do |contact| %>
 <h4><a href="/contacts/<%= contact.id %>"><%= contact.name %></a></h4>
 <h5><%= contact.title %></h5>
 <p><%= contact.email %></p>
@@ -13,12 +13,16 @@
 <br>
 <a href="/contacts/new">Create a Company Contact</a>
 <h3>Postings</h3>
-<% @postings.each do |posting| %>
+<% @company.postings.each do |posting| %>
 <h4><a href="/postings/<%= posting.id %>"><%= posting.job_title %></a></h4>
 <% end %>
 <br>
 <a href="/postings/new">Create a Posting for this Company</a>
 <h3>Skills This Company Looks For</h3>
+<% @company.skills.each do |skill| %>
+	<a href="/skills/<%= skill.id %>"><%= skill.name %></a>
+	<br>
+<% end %>
 <br>
 <a href="/companies/<%= @company.id %>/edit">Edit this Listing (if you are the creator)</a>
 <br>
