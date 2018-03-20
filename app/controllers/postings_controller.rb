@@ -51,6 +51,8 @@ class PostingsController < ApplicationController
 		if !logged_in?
 			redirect to "/login"
 		elsif @posting && @posting.user == current_user
+			@posting_status = ["open", "closed"]
+			@remote_availability = ["onsite", "remote"]
 			erb :"/postings/edit"
 		else
 			redirect to "/users/#{current_user.id}"

@@ -9,9 +9,13 @@
 	<input type="text" name="posting[job_title]" value="<%= @posting.job_title%>">
 	<h3><label for="company_id">Company:</label></h3>
 	<br>
-	<select name="posting[company_id]" value="<%= @posting.company_id %>">
+	<select name="posting[company_id]">
 		<% Company.all.each do |company| %>
-			<option value="<%= company.id %>"><%= company.name %></option>
+			<% if company == @posting.company %>
+				<option value="<%= company.id %>" selected><%= company.name %></option>
+			<% else %>
+				<option value="<%= company.id %>"><%= company.name %></option>
+			<% end %>
 		<% end %>
 	</select>
 	<h3><label for="content">Posting Content:</label></h3>
@@ -22,15 +26,25 @@
 	<input type="text" name="posting[location]" value="<%= @posting.location %>">
 	<h3><label for="status">Status:</label></h3>
 	<br>
-	<select name="posting[status]" value="<%= @posting.status %>">
-		<option value="open">Open</option>
-		<option value="closed">Closed</option>
+	<select name="posting[status]">
+		<% @posting_status.each do |status| %>
+			<% if status == @posting.status %>
+				<option value="<%= status %>" selected><%= status %></option>
+			<% else %>
+				<option value="<%= status %>"><%= status %></option>
+			<% end %>
+		<% end %>
 	</select>
 	<h3><label for="remote_availability">Remote Work Availability:</label></h3>
 	<br>
-	<select name="posting[remote_availability]" value="<%= @posting.remote_availability %>">
-		<option value="onsite">Onsite Required</option>
-		<option value="remote">Remote Available</option>
+	<select name="posting[remote_availability]">
+		<% @remote_availability.each do |option| %>
+			<% if option == @posting.remote_availability %>
+				<option value="<%= option %>" selected><%= option %></option>
+			<% else %>
+				<option value="<%= option %>"><%= option %></option>
+			<% end %>
+		<% end %>
 	</select>
 	<br>
 	<% Skill.all.each do |skill| %>
