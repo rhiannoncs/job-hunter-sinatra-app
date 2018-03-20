@@ -93,12 +93,20 @@ class PostingsController < ApplicationController
 		if !logged_in?
 			redirect to "/login"
 		else
-			skill_hash = Hash.new
-			Skill.all.each do |skill|
-				skill_hash[skill] = SkillPosting.all.count {|record| record.skill_id == skill.id}
-			end
-			@skills_count = skill_hash.sort_by {|skill, count| count}
+			used_skills = Skill.all.select {|skill| skill.postings.count > 0}
+			@skills = used_skills.sort_by {|skill| skill.postings.count}
 			erb :"/postings/skills_ranking"
+		end
+	end
+
+	get '/skills/:id' do
+		@skill = Skill.find_by(:id => params[:id])
+		if !logged_in?
+			redirect to "/login"
+		elsif !@skill
+			redirect to "/users/#{current_user.id}"
+		else
+			erb :"/postings/skill"
 		end
 	end
 

@@ -1,0 +1,8 @@
+<h1><%= @skill.name %></h1>
+<h4>Mentioned <%= @skill.postings.count %> times</h4>
+
+<h3>Postings with this skill:</h3>
+<% @skill.postings.each do |posting| %>
+	<a href="/postings/<%= posting.id %>"><%= posting.job_title %> at <%= posting.company.name %></a>
+	<br>
+<% end %>
